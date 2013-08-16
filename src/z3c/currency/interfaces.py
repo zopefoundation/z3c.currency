@@ -1,6 +1,6 @@
 ##############################################################################
 #
-# Copyright (c) 2007 Zope Foundation and Contributors.
+# Copyright (c) 2007-2013 Zope Foundation and Contributors.
 # All Rights Reserved.
 #
 # This software is subject to the provisions of the Zope Public License,
@@ -12,24 +12,33 @@
 #
 ##############################################################################
 """Currency Field interfaces
-
-$Id$
 """
 __docformat__ = "reStructuredText"
 import zope.schema
-from zope.schema import interfaces
-
+from zope.schema import interfaces, vocabulary
 from z3c.currency.i18n import MessageFactory as _
 
 # Precisions
 DOLLARS = 0
 CENTS = 1
 
+class WrongCurrencyType(zope.schema.ValidationError):
+    _("""The value is not a Decimal.""")
+
+
+class IncorrectValuePrecision(zope.schema.ValidationError):
+    _("""The amount of decimal places is incorrect.""")
+
+
 class ICurrency(interfaces.IMinMax, interfaces.IField):
 
-    precision = zope.schema.Int(
+    precision = zope.schema.Choice(
         title=_('Precision'),
         description=_('The precision in which the amount is kept.'),
+        vocabulary=vocabulary.SimpleVocabulary([
+            vocabulary.SimpleTerm(CENTS, str(CENTS), u'Cents'),
+            vocabulary.SimpleTerm(DOLLARS, str(DOLLARS), u'Dollars')
+            ]),
         default=CENTS,
         required=True)
 

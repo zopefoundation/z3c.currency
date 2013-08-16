@@ -24,7 +24,7 @@ def read(*rnames):
 
 setup (
     name='z3c.currency',
-    version='0.1.0',
+    version='1.0.0dev',
     author = "Stephan Richter and the Zope Community",
     author_email = "zope3-dev@zope.org",
     description = "A currency field and support for ``z3c.form``.",
@@ -46,6 +46,10 @@ setup (
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Zope Public License',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: Implementation :: CPython',
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Topic :: Internet :: WWW/HTTP',
@@ -66,6 +70,5 @@ setup (
         'zope.interface',
         'zope.schema',
         ],
-    dependency_links = ['http://download.zope.org/distribution'],
     zip_safe = False,
     )

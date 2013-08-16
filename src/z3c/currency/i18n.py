@@ -1,6 +1,6 @@
 ##############################################################################
 #
-# Copyright (c) 2007 Zope Foundation and Contributors.
+# Copyright (c) 2007-2013 Zope Foundation and Contributors.
 # All Rights Reserved.
 #
 # This software is subject to the provisions of the Zope Public License,
@@ -12,11 +12,6 @@
 #
 ##############################################################################
 """I18n message factory z3c.currency
-
-$Id$
 """
-__docformat__ = "reStructuredText"
-
 import zope.i18nmessageid
-
 MessageFactory = zope.i18nmessageid.MessageFactory('z3c.currency')

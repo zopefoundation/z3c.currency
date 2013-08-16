@@ -12,10 +12,7 @@
 #
 ##############################################################################
 """Currency Field implementation
-
-$Id$
 """
-__docformat__ = "reStructuredText"
 import decimal
 import zope.interface
 import zope.schema
@@ -36,16 +33,13 @@ class Currency(zope.schema.Orderable, zope.schema.Field):
 
     def _validate(self, value):
         if not isinstance(value, decimal.Decimal):
-            raise zope.schema.ValidationError(
-                "Value must be of type 'Decimal', not '%s'." % (
-                type(value).__name__) )
+            raise interfaces.WrongCurrencyType(type(value).__name__)
 
-        if self.precision is interfaces.DOLLARS and value.as_tuple()[-1] != 0:
-            raise zope.schema.ValidationError(
-                "The value must be a whole number.")
+        exp = value.as_tuple().exponent
+        if self.precision is interfaces.DOLLARS and exp != 0:
+            raise interfaces.IncorrectValuePrecision(self.precision)
 
-        if self.precision is interfaces.CENTS and value.as_tuple()[-1] != -2:
-            raise zope.schema.ValidationError(
-                "The value must have two decimal places.")
+        if self.precision is interfaces.CENTS and exp != -2:
+            raise interfaces.IncorrectValuePrecision(self.precision)
 
         super(Currency, self)._validate(value)

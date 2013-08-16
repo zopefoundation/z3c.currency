@@ -1,6 +1,6 @@
 ##############################################################################
 #
-# Copyright (c) 2007 Zope Foundation and Contributors.
+# Copyright (c) 2007-2013 Zope Foundation and Contributors.
 # All Rights Reserved.
 #
 # This software is subject to the provisions of the Zope Public License,
@@ -12,10 +12,7 @@
 #
 ##############################################################################
 """Currency Field to Text-based widget implementation
-
-$Id$
 """
-__docformat__ = "reStructuredText"
 import decimal
 import zope.component
 import zope.interface
@@ -28,8 +25,8 @@ class CurrencyConverter(object):
     zope.component.adapts(interfaces.ICurrency, IWidget)
     zope.interface.implements(IDataConverter)
 
-    inputPatterns = ('#,##0.00;-#,##0.00', '#,##0;-#,##0',)
-    outputPattern = '#,##0.00;-#,##0.00'
+    inputPatterns = ('#,##0;-#,##0', '#,##0.00;-#,##0.00')
+    outputPatterns = ('#,##0;-#,##0', '#,##0.00;-#,##0.00')
 
     def __init__(self, field, widget):
         self.field = field
@@ -39,7 +36,8 @@ class CurrencyConverter(object):
         """See interfaces.IDataConverter"""
         if value is self.field.missing_value:
             return u''
-        formatter = format.NumberFormat(self.outputPattern)
+        formatter = format.NumberFormat(
+            self.outputPatterns[self.field.precision])
         return formatter.format(value)
 
     def toFieldValue(self, value):
@@ -50,9 +48,12 @@ class CurrencyConverter(object):
         formatter.type = decimal.Decimal
         for pattern in self.inputPatterns:
             try:
-                return formatter.parse(value, pattern)
+                res = formatter.parse(value, pattern)
             except (format.NumberParseError, ValueError):
-                pass
+                continue
+            # Make sure that the resulting decimal has the right precision.
+            return res.quantize(
+                decimal.Decimal('0.01' if self.field.precision else '1'))
         raise ValueError('Could not parse %r.' %value)
 
     def __repr__(self):

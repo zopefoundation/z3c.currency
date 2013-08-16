@@ -1,6 +1,6 @@
 ##############################################################################
 #
-# Copyright (c) 2005 Zope Foundation and Contributors.
+# Copyright (c) 2007-2013 Zope Foundation and Contributors.
 # All Rights Reserved.
 #
 # This software is subject to the provisions of the Zope Public License,
@@ -12,11 +12,7 @@
 #
 ##############################################################################
 """Currency Test Setup
-
-$Id$
 """
-__docformat__ = "reStructuredText"
-
 import unittest
 from zope.testing import doctest
 from zope.testing.doctestunit import DocFileSuite

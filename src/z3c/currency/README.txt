@@ -59,12 +59,12 @@ be a decimal:
   >>> price.validate(12)
   Traceback (most recent call last):
   ...
-  ValidationError: Value must be of type 'Decimal', not 'int'.
+  WrongCurrencyType: int
 
   >>> price.validate(12.0)
   Traceback (most recent call last):
   ...
-  ValidationError: Value must be of type 'Decimal', not 'float'.
+  WrongCurrencyType: float
 
 Also, when the precision is set to DOLLARS as it is the case here, the value
 must be a whole number:
@@ -74,12 +74,12 @@ must be a whole number:
   >>> price.validate(decimal.Decimal('12.01'))
   Traceback (most recent call last):
   ...
-  ValidationError: The value must be a whole number.
+  IncorrectValuePrecision: 0
 
   >>> price.validate(decimal.Decimal('12.00'))
   Traceback (most recent call last):
   ...
-  ValidationError: The value must be a whole number.
+  IncorrectValuePrecision: 0
 
 When the precision is set to cents, ...
 
@@ -92,12 +92,12 @@ When the precision is set to cents, ...
   >>> price.validate(decimal.Decimal('12'))
   Traceback (most recent call last):
   ...
-  ValidationError: The value must have two decimal places.
+  IncorrectValuePrecision: 1
 
   >>> price.validate(decimal.Decimal('12.0'))
   Traceback (most recent call last):
   ...
-  ValidationError: The value must have two decimal places.
+  IncorrectValuePrecision: 1
 
 If the field is not required, ...
 
@@ -140,7 +140,17 @@ The converter easily produces a string from any value:
   >>> conv.toWidgetValue(decimal.Decimal('-12.00'))
   u'-12.00'
 
-Note that always two decimal places are printed.
+Note that always two decimal places are printed. You can also set the
+precision to DOLLARS:
+
+  >>> conv.field.precision = interfaces.DOLLARS
+
+  >>> conv.toWidgetValue(decimal.Decimal(12))
+  u'12'
+  >>> conv.toWidgetValue(decimal.Decimal('12.00'))
+  u'12'
+
+  >>> conv.field.precision = interfaces.CENTS
 
 If the value is missing, then handle it gracefully.
 
@@ -151,18 +161,24 @@ Let's now parse a value. The parser is a little bit for flexible, not only
 accepting the output values, ...
 
   >>> conv.toFieldValue(u'12')
-  Decimal("12")
+  Decimal('12.00')
   >>> conv.toFieldValue(u'1,200')
-  Decimal("1200")
+  Decimal('1200.00')
   >>> conv.toFieldValue(u'-12')
-  Decimal("-12")
+  Decimal('-12.00')
   >>> conv.toFieldValue(u'-12.00')
-  Decimal("-12.00")
+  Decimal('-12.00')
+
+  >>> conv.field.precision = interfaces.DOLLARS
+  >>> conv.toFieldValue(u'12')
+  Decimal('12')
+  >>> conv.toFieldValue(u'12.00')
+  Decimal('12')
 
 but also other input values:
 
   >>> conv.toFieldValue(u'1200')
-  Decimal("1200")
+  Decimal('1200')
 
 If the browser sends an empty string, then handle it gracefully.
 
