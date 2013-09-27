@@ -2,10 +2,12 @@
 CHANGES
 =======
 
-1.0.1 (unreleased)
+1.1.0 (2013-09-23)
 ------------------
 
-- Nothing changed yet.
+- Added new precision value "sub-cents" (``interfaces.SUBCENTS``), which
+  allows precision beyond pennies, which is needed for financial and other
+  business applications.
 
 
 1.0.0 (2013-08-16)

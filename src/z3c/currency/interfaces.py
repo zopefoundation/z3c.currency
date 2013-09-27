@@ -21,6 +21,7 @@ from z3c.currency.i18n import MessageFactory as _
 # Precisions
 DOLLARS = 0
 CENTS = 1
+SUBCENTS = 2
 
 class WrongCurrencyType(zope.schema.ValidationError):
     _("""The value is not a Decimal.""")
@@ -36,8 +37,9 @@ class ICurrency(interfaces.IMinMax, interfaces.IField):
         title=_('Precision'),
         description=_('The precision in which the amount is kept.'),
         vocabulary=vocabulary.SimpleVocabulary([
+            vocabulary.SimpleTerm(DOLLARS, str(DOLLARS), u'Dollars'),
             vocabulary.SimpleTerm(CENTS, str(CENTS), u'Cents'),
-            vocabulary.SimpleTerm(DOLLARS, str(DOLLARS), u'Dollars')
+            vocabulary.SimpleTerm(SUBCENTS, str(SUBCENTS), u'Sub-Cents'),
             ]),
         default=CENTS,
         required=True)

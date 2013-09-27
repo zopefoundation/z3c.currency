@@ -19,11 +19,18 @@ unit -- in the US dollar and cents. By default this field is set to cents:
   >>> price.precision is interfaces.CENTS
   True
 
-It can be set to be dollars
+It can be set to be dollars:
 
   >>> price.precision = interfaces.DOLLARS
   >>> price.precision is interfaces.DOLLARS
   True
+
+For financial applications, we also sometimes needsub-cents:
+
+  >>> price.precision = interfaces.SUBCENTS
+  >>> price.precision is interfaces.SUBCENTS
+  True
+
 
 Note: Is there a more "internationalized" word for the whole unit of a
 currency?
@@ -81,11 +88,11 @@ must be a whole number:
   ...
   IncorrectValuePrecision: 0
 
-When the precision is set to cents, ...
+When the precision is set to cents,
 
   >>> price.precision = interfaces.CENTS
 
-... then values only with two decimal places are accepted:
+then values only with two decimal places are accepted:
 
   >>> price.validate(decimal.Decimal('12.00'))
 
@@ -98,6 +105,16 @@ When the precision is set to cents, ...
   Traceback (most recent call last):
   ...
   IncorrectValuePrecision: 1
+
+If we allow sub-cents,
+
+  >>> price.precision = interfaces.SUBCENTS
+
+any precision is allowed:
+
+  >>> price.validate(decimal.Decimal('12.0'))
+  >>> price.validate(decimal.Decimal('12'))
+  >>> price.validate(decimal.Decimal('12.00001'))
 
 If the field is not required, ...
 
@@ -150,16 +167,26 @@ precision to DOLLARS:
   >>> conv.toWidgetValue(decimal.Decimal('12.00'))
   u'12'
 
-  >>> conv.field.precision = interfaces.CENTS
+Let's try sub-cents as well:
+
+  >>> conv.field.precision = interfaces.SUBCENTS
+
+  >>> conv.toWidgetValue(decimal.Decimal('12.00'))
+  u'12.00'
+  >>> conv.toWidgetValue(decimal.Decimal('12'))
+  u'12'
+  >>> conv.toWidgetValue(decimal.Decimal('12.0001'))
+  u'12.0001'
 
 If the value is missing, then handle it gracefully.
 
   >>> conv.toWidgetValue(None)
   u''
 
-Let's now parse a value. The parser is a little bit for flexible, not only
+Let's now parse a value. The parser is a little bit flexible, not only
 accepting the output values, ...
 
+  >>> conv.field.precision = interfaces.CENTS
   >>> conv.toFieldValue(u'12')
   Decimal('12.00')
   >>> conv.toFieldValue(u'1,200')
@@ -174,6 +201,16 @@ accepting the output values, ...
   Decimal('12')
   >>> conv.toFieldValue(u'12.00')
   Decimal('12')
+
+  >>> conv.field.precision = interfaces.SUBCENTS
+  >>> conv.toFieldValue(u'12')
+  Decimal('12')
+  >>> conv.toFieldValue(u'12.00')
+  Decimal('12.00')
+  >>> conv.toFieldValue(u'12.0000')
+  Decimal('12.0000')
+  >>> conv.toFieldValue(u'12.0001')
+  Decimal('12.0001')
 
 but also other input values:
 

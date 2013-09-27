@@ -25,8 +25,12 @@ class CurrencyConverter(object):
     zope.component.adapts(interfaces.ICurrency, IWidget)
     zope.interface.implements(IDataConverter)
 
-    inputPatterns = ('#,##0;-#,##0', '#,##0.00;-#,##0.00')
-    outputPatterns = ('#,##0;-#,##0', '#,##0.00;-#,##0.00')
+    inputPatterns = (
+        '#,##0;-#,##0', '#,##0.00;-#,##0.00', '#,##0.00###;-#,##0.00###')
+    outputPatterns = (
+        '#,##0;-#,##0', '#,##0.00;-#,##0.00', '#,##0.00###;-#,##0.00###')
+    quantization = ('1', '0.01', None)
+
 
     def __init__(self, field, widget):
         self.field = field
@@ -52,8 +56,10 @@ class CurrencyConverter(object):
             except (format.NumberParseError, ValueError):
                 continue
             # Make sure that the resulting decimal has the right precision.
+            if self.field.precision == interfaces.SUBCENTS:
+                return res
             return res.quantize(
-                decimal.Decimal('0.01' if self.field.precision else '1'))
+                decimal.Decimal(self.quantization[self.field.precision]))
         raise ValueError('Could not parse %r.' %value)
 
     def __repr__(self):
