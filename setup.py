@@ -27,14 +27,14 @@ setup (
     author_email = "zope3-dev@zope.org",
     description = "A currency field and support for ``z3c.form``.",
     long_description=(
-        read('README.txt')
+        read('README.rst')
         + '\n\n' +
         'Detailed Documentation\n'
         '**********************\n'
         + '\n' +
-        read('src', 'z3c', 'currency', 'README.txt')
+        read('src', 'z3c', 'currency', 'README.rst')
         + '\n\n' +
-        read('CHANGES.txt')
+        read('CHANGES.rst')
         ),
     license = "ZPL 2.1",
     keywords = "zope3 currency schema field widget form",

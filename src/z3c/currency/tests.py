@@ -20,7 +20,7 @@ import doctest
 def test_suite():
     return unittest.TestSuite([
         doctest.DocFileSuite(
-            'README.txt',
+            'README.rst',
             optionflags=doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS,
         ),
     ])
