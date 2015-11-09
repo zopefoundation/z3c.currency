@@ -22,7 +22,7 @@ def read(*rnames):
 
 setup (
     name='z3c.currency',
-    version='1.1.1.dev0',
+    version='1.1.1',
     author = "Stephan Richter and the Zope Community",
     author_email = "zope3-dev@zope.org",
     description = "A currency field and support for ``z3c.form``.",

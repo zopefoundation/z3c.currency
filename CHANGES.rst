@@ -2,7 +2,7 @@
 CHANGES
 =======
 
-1.1.1 (unreleased)
+1.1.1 (2015-11-09)
 ------------------
 
 - Standardize namespace __init__
