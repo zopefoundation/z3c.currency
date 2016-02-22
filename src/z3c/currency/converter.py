@@ -20,10 +20,10 @@ from z3c.form.interfaces import IDataConverter, IWidget
 from z3c.currency import interfaces
 from zope.i18n import format
 
+@zope.interface.implementer(IDataConverter)
 class CurrencyConverter(object):
     """Converts currency fields to text representations."""
     zope.component.adapts(interfaces.ICurrency, IWidget)
-    zope.interface.implements(IDataConverter)
 
     inputPatterns = (
         '#,##0;-#,##0', '#,##0.00;-#,##0.00', '#,##0.00###;-#,##0.00###')

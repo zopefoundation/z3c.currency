@@ -17,8 +17,8 @@ import os
 from setuptools import setup, find_packages
 
 def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__),
-                 *rnames)).read().decode('utf-8').encode('latin-1', 'ignore')
+    return open(os.path.join(os.path.dirname(__file__), *rnames), 'rb'
+                ).read().decode('utf-8')
 
 tests_require = ['z3c.form', 'zope.testing']
 

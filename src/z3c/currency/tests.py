@@ -13,8 +13,22 @@
 ##############################################################################
 """Currency Test Setup
 """
+import re
 import unittest
 import doctest
+
+from zope.testing import renormalizing
+
+
+checker = renormalizing.OutputChecker([
+    # Python 3 unicode removed the "u".
+    (re.compile("u('.*?')"),
+     r"\1"),
+    (re.compile('u(".*?")'),
+     r"\1"),
+    # Normalize the module name in exceptions:
+    (re.compile(r'z3c\.currency\.interfaces\.'), r'')
+    ])
 
 
 def test_suite():
@@ -22,6 +36,7 @@ def test_suite():
         doctest.DocFileSuite(
             'README.rst',
             optionflags=doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS,
+            checker=checker,
         ),
     ])
 
