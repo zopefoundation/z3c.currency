@@ -20,6 +20,8 @@ def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__),
                  *rnames)).read().decode('utf-8').encode('latin-1', 'ignore')
 
+tests_require = ['z3c.form', 'zope.testing']
+
 setup (
     name='z3c.currency',
     version='1.1.2.dev0',
@@ -58,7 +60,7 @@ setup (
     package_dir = {'':'src'},
     namespace_packages = ['z3c'],
     extras_require = dict(
-        test = ['z3c.form', 'zope.testing'],
+        test = tests_require,
         form = ['z3c.form'],
         ),
     install_requires = [
@@ -68,5 +70,7 @@ setup (
         'zope.interface',
         'zope.schema',
         ],
+    tests_require = tests_require,
     zip_safe = False,
+    test_suite = 'z3c.currency.tests.test_suite',
     )
