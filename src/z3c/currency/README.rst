@@ -40,9 +40,9 @@ formatting the numerical value to a string.
 
   >>> price.unit
   u'$'
-  >>> price.unit = u'€'
+  >>> price.unit = u'SEK'
   >>> price.unit
-  u'\xe2\x82\xac'
+  u'SEK'
 
 Of course, both of those attributes are available as constructor arguments:
 
@@ -50,12 +50,12 @@ Of course, both of those attributes are available as constructor arguments:
   ...    title=u'Price',
   ...    description=u'The price of the item.',
   ...    precision=interfaces.DOLLARS,
-  ...    unit=u'€')
+  ...    unit=u'SEK')
 
   >>> price.precision is interfaces.DOLLARS
   True
   >>> price.unit
-  u'\xe2\x82\xac'
+  u'SEK'
 
 Let's now have a look at the validation. First of all, the value must always
 be a decimal:
