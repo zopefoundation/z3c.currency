@@ -17,8 +17,10 @@ import os
 from setuptools import setup, find_packages
 
 def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__),
-                 *rnames)).read().decode('utf-8').encode('latin-1', 'ignore')
+    return open(os.path.join(os.path.dirname(__file__), *rnames), 'rb'
+                ).read().decode('utf-8')
+
+tests_require = ['z3c.form', 'zope.testing']
 
 setup (
     name='z3c.currency',
@@ -47,6 +49,9 @@ setup (
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: Implementation :: CPython',
         'Natural Language :: English',
         'Operating System :: OS Independent',
@@ -58,7 +63,7 @@ setup (
     package_dir = {'':'src'},
     namespace_packages = ['z3c'],
     extras_require = dict(
-        test = ['z3c.form', 'zope.testing'],
+        test = tests_require,
         form = ['z3c.form'],
         ),
     install_requires = [
@@ -68,5 +73,7 @@ setup (
         'zope.interface',
         'zope.schema',
         ],
+    tests_require = tests_require,
     zip_safe = False,
+    test_suite = 'z3c.currency.tests.test_suite',
     )

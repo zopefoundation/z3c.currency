@@ -5,7 +5,9 @@ CHANGES
 1.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Python 3 support
+
+- Tests now run with `python setup.py test`
 
 
 1.1.1 (2015-11-09)
