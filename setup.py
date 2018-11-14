@@ -24,7 +24,7 @@ tests_require = ['z3c.form', 'zope.testing']
 
 setup (
     name='z3c.currency',
-    version='1.2.0',
+    version='1.2.1.dev0',
     author = "Stephan Richter and the Zope Community",
     author_email = "zope3-dev@zope.org",
     description = "A currency field and support for ``z3c.form``.",
