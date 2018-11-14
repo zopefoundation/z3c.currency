@@ -15,7 +15,7 @@ matrix:
           python: pypy3
 
 install:
-    - travis_retry pip install .[test]
+    - travis_retry pip install .[form,test]
     - travis_retry pip install coverage coveralls tox zope.testing
 
 script:
