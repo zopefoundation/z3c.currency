@@ -2,10 +2,10 @@
 CHANGES
 =======
 
-1.1.2 (unreleased)
+1.2.0 (unreleased)
 ------------------
 
-- Python 3 support
+- Python 3.6 and 3.7 support. Drop Python 2.6.
 
 - Tests now run with `python setup.py test`
 
