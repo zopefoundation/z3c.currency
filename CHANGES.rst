@@ -2,7 +2,7 @@
 CHANGES
 =======
 
-1.2.0 (unreleased)
+1.2.0 (2018-11-14)
 ------------------
 
 - Python 3.6 and 3.7 support. Drop Python 2.6.
