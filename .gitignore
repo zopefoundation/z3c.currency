@@ -8,3 +8,5 @@ parts
 __pycache__
 src/*.egg-info
 .tox/
+.coverage
+.eggs
