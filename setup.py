@@ -18,11 +18,8 @@ from setuptools import setup, find_packages
 
 
 def read(*rnames):
-    return (
-        open(os.path.join(os.path.dirname(__file__), *rnames), "rb")
-        .read()
-        .decode("utf-8")
-    )
+    with open(os.path.join(os.path.dirname(__file__), *rnames), "rb") as fp:
+        return fp.read().decode("utf-8")
 
 
 tests_require = ["z3c.form", "zope.testing"]
@@ -34,8 +31,10 @@ setup(
     author_email="zope3-dev@zope.org",
     description="A currency field and support for ``z3c.form``.",
     long_description=(
-        read("README.rst") + "\n\n" + "Detailed Documentation\n"
-        "**********************\n"
+        read("README.rst")
+        + "\n\n"
+        + "Detailed Documentation\n"
+        + "**********************\n"
         + "\n"
         + read("src", "z3c", "currency", "README.rst")
         + "\n\n"
@@ -61,7 +60,7 @@ setup(
         "Topic :: Internet :: WWW/HTTP",
         "Framework :: Zope :: 3",
     ],
-    url="http://svn.zope.org/z3c.currency",
+    url="https://github.com/zopefoundation/z3c.currency",
     packages=find_packages("src"),
     include_package_data=True,
     package_dir={"": "src"},
