@@ -10,3 +10,4 @@ src/*.egg-info
 .tox/
 .coverage
 .eggs
+.coverage.*
