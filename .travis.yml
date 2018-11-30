@@ -11,11 +11,11 @@ matrix:
           sudo: true
 
 install:
-    - travis_retry pip install .[form,test] z3c.form
-    - travis_retry pip install coverage coveralls tox zope.testing
+    - pip install .[form,test]
+    - pip install coverage coveralls zope.testrunner
 
 script:
-    - coverage run setup.py test -q
+    - coverage run -m zope.testrunner --test-path=src -vc
 
 notifications:
     email: false
