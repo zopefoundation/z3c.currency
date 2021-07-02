@@ -1,8 +1,10 @@
-recursive-include src *.cfg *.txt *.rst *.zcml
-include *.txt
+# Generated from:
+# https://github.com/zopefoundation/meta/tree/master/config/pure-python
 include *.rst
+include *.txt
+include buildout.cfg
 include tox.ini
-include .coveragerc
 
-global-exclude *.pyc
-
+recursive-include src *.py
+recursive-include src *.rst
+recursive-include src *.zcml
