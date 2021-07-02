@@ -20,6 +20,7 @@ from zope.schema.fieldproperty import FieldProperty
 
 from z3c.currency import interfaces
 
+
 @zope.interface.implementer(interfaces.ICurrency)
 class Currency(zope.schema.Orderable, zope.schema.Field):
 

@@ -20,6 +20,7 @@ from z3c.form.interfaces import IDataConverter, IWidget
 from z3c.currency import interfaces
 from zope.i18n import format
 
+
 @zope.component.adapter(interfaces.ICurrency, IWidget)
 @zope.interface.implementer(IDataConverter)
 class CurrencyConverter(object):
@@ -30,7 +31,6 @@ class CurrencyConverter(object):
     outputPatterns = (
         '#,##0;-#,##0', '#,##0.00;-#,##0.00', '#,##0.00###;-#,##0.00###')
     quantization = ('1', '0.01', None)
-
 
     def __init__(self, field, widget):
         self.field = field
@@ -60,8 +60,8 @@ class CurrencyConverter(object):
                 return res
             return res.quantize(
                 decimal.Decimal(self.quantization[self.field.precision]))
-        raise ValueError('Could not parse %r.' %value)
+        raise ValueError('Could not parse %r.' % value)
 
     def __repr__(self):
-        return '<DataConverter from %s to %s>' %(
+        return '<DataConverter from %s to %s>' % (
             self.field.__class__.__name__, self.widget.__class__.__name__)
