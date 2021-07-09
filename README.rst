@@ -1,6 +1,6 @@
 
-.. image:: https://travis-ci.com/zopefoundation/z3c.currency.png?branch=master
-   :target: https://travis-ci.com/zopefoundation/z3c.currency
+.. image:: https://github.com/zopefoundation/z3c.currency/actions/workflows/tests.yml/badge.svg
+   :target: https://github.com/zopefoundation/z3c.currency/actions/workflows/tests.yml
 
 .. image:: https://coveralls.io/repos/github/zopefoundation/z3c.currency/badge.svg?branch=master
    :target: https://coveralls.io/github/zopefoundation/z3c.currency?branch=master
