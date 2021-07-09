@@ -1,9 +1,0 @@
-[run]
-source = z3c.currency
-omit = */test*
-
-[paths]
-source =
-   src/z3c/currency
-   .tox/*/lib/python*/site-packages/z3c/currency
-   .tox/pypy*/site-packages/z3c/currency

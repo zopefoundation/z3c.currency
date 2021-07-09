@@ -22,7 +22,11 @@ def read(*rnames):
         return fp.read().decode("utf-8")
 
 
-tests_require = ["z3c.form", "zope.testing"]
+tests_require = [
+    "z3c.form",
+    "zope.testing",
+    "zope.testrunner",
+]
 
 setup(
     name="z3c.currency",
@@ -51,8 +55,11 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
         "Natural Language :: English",
@@ -65,7 +72,9 @@ setup(
     include_package_data=True,
     package_dir={"": "src"},
     namespace_packages=["z3c"],
-    extras_require=dict(test=tests_require, form=["z3c.form"]),
+    extras_require=dict(
+        test=tests_require,
+        form=["z3c.form"]),
     install_requires=[
         "setuptools",
         "zope.i18n",

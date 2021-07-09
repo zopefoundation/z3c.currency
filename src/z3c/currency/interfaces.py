@@ -23,6 +23,7 @@ DOLLARS = 0
 CENTS = 1
 SUBCENTS = 2
 
+
 class WrongCurrencyType(zope.schema.ValidationError):
     _("""The value is not a Decimal.""")
 
@@ -40,7 +41,7 @@ class ICurrency(interfaces.IMinMax, interfaces.IField):
             vocabulary.SimpleTerm(DOLLARS, str(DOLLARS), u'Dollars'),
             vocabulary.SimpleTerm(CENTS, str(CENTS), u'Cents'),
             vocabulary.SimpleTerm(SUBCENTS, str(SUBCENTS), u'Sub-Cents'),
-            ]),
+        ]),
         default=CENTS,
         required=True)
 

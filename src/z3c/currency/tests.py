@@ -28,7 +28,7 @@ checker = renormalizing.OutputChecker([
      r"\1"),
     # Normalize the module name in exceptions:
     (re.compile(r'z3c\.currency\.interfaces\.'), r'')
-    ])
+])
 
 
 def test_suite():
@@ -39,6 +39,3 @@ def test_suite():
             checker=checker,
         ),
     ])
-
-if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite')
