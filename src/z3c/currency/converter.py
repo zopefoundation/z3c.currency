@@ -17,16 +17,16 @@ import decimal
 
 import zope.component
 import zope.interface
+from z3c.form.interfaces import IDataConverter
+from z3c.form.interfaces import IWidget
 from zope.i18n import format
 
 from z3c.currency import interfaces
-from z3c.form.interfaces import IDataConverter
-from z3c.form.interfaces import IWidget
 
 
 @zope.component.adapter(interfaces.ICurrency, IWidget)
 @zope.interface.implementer(IDataConverter)
-class CurrencyConverter(object):
+class CurrencyConverter:
     """Converts currency fields to text representations."""
 
     inputPatterns = (
@@ -42,14 +42,14 @@ class CurrencyConverter(object):
     def toWidgetValue(self, value):
         """See interfaces.IDataConverter"""
         if value is self.field.missing_value:
-            return u''
+            return ''
         formatter = format.NumberFormat(
             self.outputPatterns[self.field.precision])
         return formatter.format(value)
 
     def toFieldValue(self, value):
         """See interfaces.IDataConverter"""
-        if value == u'':
+        if value == '':
             return self.field.missing_value
         formatter = format.NumberFormat()
         formatter.type = decimal.Decimal
@@ -66,5 +66,5 @@ class CurrencyConverter(object):
         raise ValueError('Could not parse %r.' % value)
 
     def __repr__(self):
-        return '<DataConverter from %s to %s>' % (
+        return '<DataConverter from {} to {}>'.format(
             self.field.__class__.__name__, self.widget.__class__.__name__)

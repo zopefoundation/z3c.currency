@@ -34,7 +34,7 @@ setup(
     name="z3c.currency",
     version="2.0.dev0",
     author="Stephan Richter and the Zope Community",
-    author_email="zope3-dev@zope.org",
+    author_email="zope-dev@zope.dev",
     description="A currency field and support for ``z3c.form``.",
     long_description=(
         read("README.rst")
@@ -72,6 +72,7 @@ setup(
     include_package_data=True,
     package_dir={"": "src"},
     namespace_packages=["z3c"],
+    python_requires='>=3.7',
     extras_require=dict(
         test=tests_require,
         form=["z3c.form"]),
@@ -82,7 +83,5 @@ setup(
         "zope.interface",
         "zope.schema",
     ],
-    tests_require=tests_require,
     zip_safe=False,
-    test_suite="z3c.currency.tests.test_suite",
 )

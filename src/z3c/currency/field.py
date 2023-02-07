@@ -28,8 +28,8 @@ class Currency(zope.schema.Orderable, zope.schema.Field):
     precision = FieldProperty(interfaces.ICurrency['precision'])
     unit = FieldProperty(interfaces.ICurrency['unit'])
 
-    def __init__(self, precision=interfaces.CENTS, unit=u'$', *args, **kw):
-        super(Currency, self).__init__(*args, **kw)
+    def __init__(self, precision=interfaces.CENTS, unit='$', *args, **kw):
+        super().__init__(*args, **kw)
         self.precision = precision
         self.unit = unit
 
@@ -44,4 +44,4 @@ class Currency(zope.schema.Orderable, zope.schema.Field):
         if self.precision is interfaces.CENTS and exp != -2:
             raise interfaces.IncorrectValuePrecision(self.precision)
 
-        super(Currency, self)._validate(value)
+        super()._validate(value)
