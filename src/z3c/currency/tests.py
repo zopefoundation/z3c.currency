@@ -13,9 +13,9 @@
 ##############################################################################
 """Currency Test Setup
 """
+import doctest
 import re
 import unittest
-import doctest
 
 from zope.testing import renormalizing
 

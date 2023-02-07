@@ -14,6 +14,7 @@
 """Currency Field implementation
 """
 import decimal
+
 import zope.interface
 import zope.schema
 from zope.schema.fieldproperty import FieldProperty

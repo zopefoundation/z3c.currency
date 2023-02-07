@@ -15,8 +15,11 @@
 """
 __docformat__ = "reStructuredText"
 import zope.schema
-from zope.schema import interfaces, vocabulary
+from zope.schema import interfaces
+from zope.schema import vocabulary
+
 from z3c.currency.i18n import MessageFactory as _
+
 
 # Precisions
 DOLLARS = 0

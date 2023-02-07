@@ -14,11 +14,14 @@
 """Currency Field to Text-based widget implementation
 """
 import decimal
+
 import zope.component
 import zope.interface
-from z3c.form.interfaces import IDataConverter, IWidget
-from z3c.currency import interfaces
 from zope.i18n import format
+
+from z3c.currency import interfaces
+from z3c.form.interfaces import IDataConverter
+from z3c.form.interfaces import IWidget
 
 
 @zope.component.adapter(interfaces.ICurrency, IWidget)
