@@ -15,8 +15,11 @@
 """
 __docformat__ = "reStructuredText"
 import zope.schema
-from zope.schema import interfaces, vocabulary
+from zope.schema import interfaces
+from zope.schema import vocabulary
+
 from z3c.currency.i18n import MessageFactory as _
+
 
 # Precisions
 DOLLARS = 0
@@ -38,9 +41,9 @@ class ICurrency(interfaces.IMinMax, interfaces.IField):
         title=_('Precision'),
         description=_('The precision in which the amount is kept.'),
         vocabulary=vocabulary.SimpleVocabulary([
-            vocabulary.SimpleTerm(DOLLARS, str(DOLLARS), u'Dollars'),
-            vocabulary.SimpleTerm(CENTS, str(CENTS), u'Cents'),
-            vocabulary.SimpleTerm(SUBCENTS, str(SUBCENTS), u'Sub-Cents'),
+            vocabulary.SimpleTerm(DOLLARS, str(DOLLARS), 'Dollars'),
+            vocabulary.SimpleTerm(CENTS, str(CENTS), 'Cents'),
+            vocabulary.SimpleTerm(SUBCENTS, str(SUBCENTS), 'Sub-Cents'),
         ]),
         default=CENTS,
         required=True)
@@ -48,5 +51,5 @@ class ICurrency(interfaces.IMinMax, interfaces.IField):
     unit = zope.schema.TextLine(
         title=_('Unit'),
         description=_('The unit in which the currency amount is kept.'),
-        default=u'$',
+        default='$',
         required=True)
