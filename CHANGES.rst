@@ -5,11 +5,11 @@ CHANGES
 2.0 (unreleased)
 ----------------
 
-- Add support for Python 3.10, 3.11.
-
 - Drop support for Python 2.7, 3.5, 3.6.
 
-- Add support for Python 3.5, 3.8 and 3.9.
+- Add support for Python 3.8, 3.9, 3.10, 3.11.
+
+- Drop deprecated support for running the tests using ``python setup.py test``.
 
 
 1.2.0 (2018-11-14)
@@ -17,7 +17,7 @@ CHANGES
 
 - Python 3.6 and 3.7 support. Drop Python 2.6.
 
-- Tests now run with `python setup.py test`
+- Tests now run with ``python setup.py test``.
 
 
 1.1.1 (2015-11-09)
